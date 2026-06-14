@@ -199,7 +199,7 @@ function proceedToDonate() {
   const upiLink = `upi://pay?pa=trust@upi&pn=CSASCT&am=${finalAmount}&cu=INR&tn=${encodeURIComponent(purposeMap[purpose])}`;
   
   // Open WhatsApp with pre-filled message for payment confirmation
-  window.open(`https://wa.me/917839940366?text=${msg}`, '_blank');
+  window.open(`https://wa.me/919105575963?text=${msg}`, '_blank');
   
   showToast(`₹${finalAmount.toLocaleString('hi-IN')} का दान — धन्यवाद! 🙏`, 'success');
 }
@@ -252,8 +252,8 @@ async function handleContactSubmit(e) {
       // Auto WhatsApp follow-up
       const name  = formData.get('name');
       const phone = formData.get('phone');
-      const msg   = encodeURIComponent(`नमस्ते ${name} जी! 🙏\n\nआपका संदेश हमें मिल गया है। हम जल्द ही आपसे संपर्क करेंगे।\n\n— Chakravarti Samrat Ashok Sena Charitable Trust`);
-      console.log(`Auto-reply will be sent to ${phone}`);
+      // Notification auto-sent to kushawahasunil2013@gmail.com via Formspree _cc
+      console.log(`Form submitted by ${name} (${phone}) — email sent to kushawahasunil2013@gmail.com`);
 
     } else {
       throw new Error('Form submission failed');
@@ -264,7 +264,7 @@ async function handleContactSubmit(e) {
     const name = form.querySelector('#c-name').value;
     const msg = form.querySelector('#c-msg').value;
     const waMsg = encodeURIComponent(`नमस्ते! मेरा नाम ${name} है। ${msg}`);
-    window.open(`https://wa.me/917839940366?text=${waMsg}`, '_blank');
+    window.open(`https://wa.me/919105575963?text=${waMsg}`, '_blank');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> संदेश भेजें';
   }
@@ -305,7 +305,7 @@ async function handleVolunteerSubmit(e) {
     const msg = encodeURIComponent(
       `नमस्ते! मेरा नाम ${name} है। मेरा मोबाइल नंबर ${phone} है। मैं ${area} क्षेत्र में स्वयंसेवक बनना चाहता/चाहती हूं।`
     );
-    window.open(`https://wa.me/917839940366?text=${msg}`, '_blank');
+    window.open(`https://wa.me/919105575963?text=${msg}`, '_blank');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> आवेदन भेजें';
   }

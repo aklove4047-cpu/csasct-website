@@ -1,0 +1,16 @@
+{
+  "name": "chakravarti-samrat-ashok-sena-charitable-trust",
+  "version": "1.0.0",
+  "description": "Chakravarti Samrat Ashok Sena Charitable Trust Official Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

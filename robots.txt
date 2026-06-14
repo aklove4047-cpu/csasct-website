@@ -1,0 +1,19 @@
+# robots.txt — Chakravarti Samrat Ashok Sena Charitable Trust
+# https://chakravartisamratashoksenacheritabletrust.online
+
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+
+# Sitemap location — Google will auto-discover this
+Sitemap: https://chakravartisamratashoksenacheritabletrust.online/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 5

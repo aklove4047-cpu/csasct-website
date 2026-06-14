@@ -1,6 +1,7 @@
 // ============================================================
 // server.js — Express Static Server for Render Deployment
 // Chakravarti Samrat Ashok Sena Charitable Trust
+// Domain: chakravartisamratashoksenacheritabletrust.online
 // ============================================================
 
 const express = require('express');
@@ -9,10 +10,28 @@ const path    = require('path');
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve all static files from current directory
+// ---- SEO Headers Middleware ----
+app.use((req, res, next) => {
+  res.setHeader('X-Robots-Tag', 'index, follow');
+  next();
+});
+
+// ---- Explicit SEO File Routes (must be BEFORE static middleware) ----
+app.get('/sitemap.xml', (req, res) => {
+  res.setHeader('Content-Type', 'application/xml');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.sendFile(path.join(__dirname, 'sitemap.xml'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.sendFile(path.join(__dirname, 'robots.txt'));
+});
+
+// ---- Static Files ----
 app.use(express.static(path.join(__dirname), {
   setHeaders: (res, filePath) => {
-    // Cache static assets
     if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
       res.setHeader('Cache-Control', 'public, max-age=31536000');
     }
@@ -22,7 +41,7 @@ app.use(express.static(path.join(__dirname), {
   }
 }));
 
-// All routes serve index.html (SPA support)
+// ---- All other routes → index.html ----
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });

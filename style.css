@@ -1254,6 +1254,34 @@ input, select, textarea, button { font-family: inherit; }
   .team-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
+/* Touch devices: Make WhatsApp button a corner badge, do not hide face behind overlay */
+@media (max-width: 900px), (hover: none) {
+  .team-overlay {
+    opacity: 1 !important;
+    background: transparent !important;
+    pointer-events: none;
+  }
+  .team-overlay a.team-wa {
+    pointer-events: auto;
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+    transform: scale(1) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .team-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: rgba(255,215,0,0.12) !important;
+  }
+  .team-card:hover .team-img {
+    transform: none !important;
+  }
+}
+
 /* ============================================================
    REGISTRATION & LEGAL STATUS SECTION
    ============================================================ */

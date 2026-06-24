@@ -9,13 +9,20 @@
 // ============================================================
 // 1. PRELOADER
 // ============================================================
-window.addEventListener('load', () => {
+const hidePreloader = () => {
   const preloader = document.getElementById('preloader');
-  setTimeout(() => {
+  if (preloader && !preloader.classList.contains('hide')) {
     preloader.classList.add('hide');
     setTimeout(() => { preloader.style.display = 'none'; }, 700);
-  }, 1800);
+  }
+};
+
+window.addEventListener('load', () => {
+  setTimeout(hidePreloader, 500);
 });
+
+// Safety fallback: Hide preloader after 4 seconds regardless of load event
+setTimeout(hidePreloader, 4000);
 
 // ============================================================
 // 2. NAVBAR — Scroll & Mobile Toggle

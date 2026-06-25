@@ -472,5 +472,40 @@ document.getElementById('customAmount').addEventListener('input', function() {
   }
 });
 
+// ============================================================
+// 18. DYNAMIC GALLERY FILTER
+// ============================================================
+function initGalleryFilters() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item-new');
+
+  if (!filterBtns.length || !galleryItems.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle active class on buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      galleryItems.forEach(item => {
+        // Reset classes
+        item.classList.remove('fade-in-show');
+        item.classList.remove('hidden');
+
+        if (filterValue === 'all' || item.classList.contains(filterValue)) {
+          item.classList.add('fade-in-show');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+// Run initialisation
+initGalleryFilters();
+
 console.log('%c🙏 Chakravarti Samrat Ashok Sena Charitable Trust', 'color: #FF6B35; font-size: 16px; font-weight: bold;');
 console.log('%cWebsite by: chakravartisamratashoksenacheritabletrust.online', 'color: #FFD700; font-size: 12px;');

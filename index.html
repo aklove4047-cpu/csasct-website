@@ -1770,7 +1770,18 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <script src="script.js?v=5"></script>
+  <!-- ========== LIGHTBOX MODAL ========== -->
+  <div id="galleryLightbox" class="lightbox-modal">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <button class="lightbox-prev" onclick="changeLightboxImage(-1)" aria-label="Previous image">&#10094;</button>
+    <div class="lightbox-content-wrap">
+      <img id="lightboxImg" src="" alt="Full size gallery image" />
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-next" onclick="changeLightboxImage(1)" aria-label="Next image">&#10095;</button>
+  </div>
+
+  <script src="script.js?v=6"></script>
 </body>
 
 </html>

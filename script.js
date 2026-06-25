@@ -430,6 +430,7 @@ window.addEventListener('hashchange', () => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeBankModal();
+    closeLightbox();
     navLinks.classList.remove('open');
     navToggle.classList.remove('active');
   }
@@ -506,6 +507,100 @@ function initGalleryFilters() {
 
 // Run initialisation
 initGalleryFilters();
+
+// ============================================================
+// 19. GALLERY LIGHTBOX MODAL
+// ============================================================
+let activeLightboxImages = [];
+let currentLightboxIndex = 0;
+
+function initLightbox() {
+  const items = document.querySelectorAll('.gallery-item-new');
+  if (!items.length) return;
+
+  items.forEach(item => {
+    // Add click handler to open lightbox
+    item.addEventListener('click', () => {
+      // Find all currently visible (not hidden) items
+      activeLightboxImages = Array.from(document.querySelectorAll('.gallery-item-new:not(.hidden)'));
+      currentLightboxIndex = activeLightboxImages.indexOf(item);
+      openLightbox();
+    });
+  });
+
+  // Keyboard navigation for Lightbox
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('galleryLightbox');
+    if (modal && modal.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') {
+        changeLightboxImage(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeLightboxImage(1);
+      }
+    }
+  });
+}
+
+function openLightbox() {
+  const modal = document.getElementById('galleryLightbox');
+  const modalImg = document.getElementById('lightboxImg');
+  const caption = document.getElementById('lightboxCaption');
+  
+  if (!modal || !modalImg || !activeLightboxImages.length) return;
+
+  const currentItem = activeLightboxImages[currentLightboxIndex];
+  const imgElement = currentItem.querySelector('img');
+  const captionText = currentItem.querySelector('.item-overlay-new span').textContent;
+
+  modalImg.src = imgElement.src;
+  caption.textContent = captionText;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Disable scroll
+}
+
+function closeLightbox() {
+  const modal = document.getElementById('galleryLightbox');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Enable scroll
+  }
+}
+
+function changeLightboxImage(direction) {
+  if (!activeLightboxImages.length) return;
+  
+  currentLightboxIndex += direction;
+  
+  if (currentLightboxIndex >= activeLightboxImages.length) {
+    currentLightboxIndex = 0; // Wrap around to start
+  } else if (currentLightboxIndex < 0) {
+    currentLightboxIndex = activeLightboxImages.length - 1; // Wrap around to end
+  }
+
+  const modalImg = document.getElementById('lightboxImg');
+  const caption = document.getElementById('lightboxCaption');
+  
+  const currentItem = activeLightboxImages[currentLightboxIndex];
+  const imgElement = currentItem.querySelector('img');
+  const captionText = currentItem.querySelector('.item-overlay-new span').textContent;
+
+  modalImg.src = imgElement.src;
+  caption.textContent = captionText;
+}
+
+// Close lightbox on modal click (outside image)
+const lightboxModalEl = document.getElementById('galleryLightbox');
+if (lightboxModalEl) {
+  lightboxModalEl.addEventListener('click', (e) => {
+    if (e.target.id === 'galleryLightbox') {
+      closeLightbox();
+    }
+  });
+}
+
+// Run Lightbox initialization
+initLightbox();
 
 console.log('%c🙏 Chakravarti Samrat Ashok Sena Charitable Trust', 'color: #FF6B35; font-size: 16px; font-weight: bold;');
 console.log('%cWebsite by: chakravartisamratashoksenacheritabletrust.online', 'color: #FFD700; font-size: 12px;');
